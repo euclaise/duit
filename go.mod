@@ -1,4 +1,4 @@
-module github.com/euclaise/duit/v0.0.1
+module github.com/euclaise/duit
 
 go 1.20
 
