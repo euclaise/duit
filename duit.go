@@ -466,7 +466,7 @@ func (d *DUI) MarkDraw(ui UI) {
 
 func (d *DUI) apply(r Result) {
 	if r.Warp != nil {
-		err := d.Display.MoveTo(*r.Warp)
+		err := d.Display.MoveCursor(*r.Warp)
 		if err != nil {
 			log.Printf("duit: warp to %v: %s\n", r.Warp, err)
 		} else {
@@ -502,7 +502,7 @@ func (d *DUI) Mouse(m draw.Mouse) {
 
 // Resize handles a resize of the window. Resize is called automatically through Input when the user resizes a window.
 func (d *DUI) Resize() {
-	err := d.Display.Attach(draw.Refmesg)
+	err := d.Display.Attach(draw.RefMesg)
 	if d.error(err, "attach after resize") {
 		return
 	}
@@ -598,7 +598,7 @@ func (d *DUI) Focus(ui UI) {
 		log.Printf("duit: focus: no ui found for %T %p\n", ui, ui)
 		return
 	}
-	err := d.Display.MoveTo(*p)
+	err := d.Display.MoveCursor(*p)
 	if err != nil {
 		log.Printf("duit: move mouse to %v: %v\n", *p, err)
 		return
@@ -719,7 +719,7 @@ func (d *DUI) Font(font *draw.Font) *draw.Font {
 	if font != nil {
 		return font
 	}
-	return d.Display.DefaultFont
+	return d.Display.Font
 }
 
 // WriteSnarf writes the snarf buffer and logs an error in case of failure.

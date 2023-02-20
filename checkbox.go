@@ -23,7 +23,7 @@ func (ui *Checkbox) font(dui *DUI) *draw.Font {
 	if ui.Font != nil {
 		return ui.Font
 	}
-	return dui.Display.DefaultFont
+	return dui.Display.Font
 }
 
 func (ui *Checkbox) size(dui *DUI) image.Point {

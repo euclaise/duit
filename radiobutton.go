@@ -40,7 +40,7 @@ func (ui *Radiobutton) font(dui *DUI) *draw.Font {
 	if ui.Font != nil {
 		return ui.Font
 	}
-	return dui.Display.DefaultFont
+	return dui.Display.Font
 }
 
 func (ui *Radiobutton) size(dui *DUI) image.Point {
@@ -48,21 +48,21 @@ func (ui *Radiobutton) size(dui *DUI) image.Point {
 }
 
 func (ui *Radiobutton) innerDim(dui *DUI) int {
-	return 7 * dui.Display.DefaultFont.Height / 10
+	return 7 * dui.Display.Font.Height / 10
 }
 
 func (ui *Radiobutton) Layout(dui *DUI, self *Kid, sizeAvail image.Point, force bool) {
 	dui.debugLayout(self)
 
 	hit := image.Point{0, 1}
-	size := pt(2*BorderSize + 7*dui.Display.DefaultFont.Height/10).Add(hit)
+	size := pt(2*BorderSize + 7*dui.Display.Font.Height/10).Add(hit)
 	self.R = rect(size)
 }
 
 func (ui *Radiobutton) Draw(dui *DUI, self *Kid, img *draw.Image, orig image.Point, m draw.Mouse, force bool) {
 	dui.debugDraw(self)
 
-	r := rect(pt(2*BorderSize + 7*dui.Display.DefaultFont.Height/10))
+	r := rect(pt(2*BorderSize + 7*dui.Display.Font.Height/10))
 	hover := m.In(r)
 	r = r.Add(orig)
 
@@ -87,10 +87,10 @@ func (ui *Radiobutton) Draw(dui *DUI, self *Kid, img *draw.Image, orig image.Poi
 	radius := r.Dx() / 2
 	img.Arc(r.Min.Add(pt(radius)), radius, radius, 0, color, image.ZP, 0, 360)
 
-	cr := r.Inset((7 * dui.Display.DefaultFont.Height / 10) / 5)
+	cr := r.Inset((7 * dui.Display.Font.Height / 10) / 5)
 	if ui.Selected {
 		radius = cr.Dx() / 2
-		img.FillArc(cr.Min.Add(pt(radius)), radius, radius, 0, color, image.ZP, 0, 360)
+		img.FillArc(cr.Min.Add(pt(radius)), radius, radius, color, image.ZP, 0, 360)
 	}
 }
 
